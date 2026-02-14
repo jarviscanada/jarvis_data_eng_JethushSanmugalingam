@@ -31,7 +31,6 @@ docker run --name jrvs-psql \
 	postgres:9.6-alpine 
 
 docker exec -i jrvs-psql psql -U $db_username -d host_agent -f /sql/ddl.sql 
-
 exit $? 
 ;;
 
@@ -50,17 +49,4 @@ exit $?
 	echo "Commands: start|stop|create" 
 	exit 1
 	;;
-esac 
-
-
-
-
-
-
-
-
-
-
-
-
-
+esac
