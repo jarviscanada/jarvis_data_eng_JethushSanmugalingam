@@ -33,4 +33,6 @@ CREATE TABLE cd.bookings (
   slots integer 
 ); 
 
+## Practice SQL Queries 
 
+Q1. 
