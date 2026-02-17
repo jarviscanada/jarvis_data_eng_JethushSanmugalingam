@@ -97,7 +97,26 @@ Q11. How can you produce a list of members who joined after the start of Septemb
 SELECT memid, surname, firstname, joindate FROM cd.members
 WHERE joindate >= '2012-09-01';  
 
-Q12. 
+Q12. You, for some reason, want a combined list of all surnames and all facility names. Yes, this is a contrived example :-). Produce that list!
+
+SELECT surname FROM cd.members
+UNION -- Note: UNION helps us combine two different SELECT Statements
+SELECT name FROM cd.facilities;
+
+#### Joins 
+
+Q13. How can you produce a list of the start times for bookings by members named 'David Farrell'?
+
+SELECT starttime
+FROM cd.bookings 
+JOIN cd.members
+ON cd.bookings.memid = cd.members.memid
+WHERE firstname = 'David' AND surname = 'Farrell';
+
+Q14. How can you produce a list of the start times for bookings for tennis courts, for the date '2012-09-21'? Return a list of start time and facility name pairings, ordered by the time.
+
+
+
 
 
 
