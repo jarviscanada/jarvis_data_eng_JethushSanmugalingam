@@ -124,7 +124,25 @@ ON cd.bookings.facid = cd.facilities.facid
 WHERE starttime >= '2012-09-21' AND starttime < '2012-09-22' AND Name LIKE '%Tennis Court%'
 ORDER BY Starttime;
 
-Q15. Produce a count of the number of recommendations each member has made. Order by member ID.
+Q15. How can you output a list of all members, including the individual who recommended them (if any)? Ensure that results are ordered by (surname, firstname).
+
+SELECT m.firstname, m.surname, r.firstname, r.surname
+FROM cd.members m
+LEFT JOIN cd.members r
+ON m.recommendedby = r.memid
+ORDER BY m.surname, m.firstname;
+
+Q16. How can you output a list of all members who have recommended another member? Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
+
+--Need to do 
+
+Q17. How can you output a list of all members, including the individual who recommended them (if any), without using any joins? Ensure that there are no duplicates in the list, and that each firstname + surname pairing is formatted as a column and ordered.
+
+--Need to do 
+
+#### Aggregation
+
+Q18. Produce a count of the number of recommendations each member has made. Order by member ID.
 
 SELECT recommendedby, COUNT(memid) FROM cd.members
 GROUP BY recommendedby
@@ -132,7 +150,7 @@ ORDER BY recommendedby;
 
 -- I know this is wrong, I have to revisit this. 
 
-Q16. Produce a list of the total number of slots booked per facility. For now, just produce an output table consisting of facility id and slots, sorted by facility id. 
+Q19. Produce a list of the total number of slots booked per facility. For now, just produce an output table consisting of facility id and slots, sorted by facility id. 
 
 SELECT facid, SUM(slots) 
 FROM cd.bookings
@@ -141,7 +159,7 @@ ON cd.bookings.facid = cd.facilities.facid
 GROUP BY facid
 ORDER BY facid;
 
-Q17. Produce a list of the total number of slots booked per facility in the month of September 2012. Produce an output table consisting of facility id and slots, sorted by the number of slots.
+Q20. Produce a list of the total number of slots booked per facility in the month of September 2012. Produce an output table consisting of facility id and slots, sorted by the number of slots.
 
 SELECT facid, SUM(slots)
 FROM cd.bookings
@@ -149,7 +167,19 @@ WHERE cd.bookings.starttime >= '2012-09-01' AND cd.bookings.starttime < '2012-10
 GROUP BY facid 
 ORDER BY SUM(slots);
 
-Q18. 
+Q21. Produce a list of the total number of slots booked per facility per month in the year of 2012. Produce an output table consisting of facility id and slots, sorted by the id and month.
+
+SELECT facid, EXTRACT(MONTH FROM starttime) AS month, SUM(Slots)
+FROM cd.bookings 
+WHERE starttime >= '2012-01-01' AND starttime < '2013-01-01'
+GROUP BY facid, month
+ORDER BY facid, month;
+
+Q22. Find the total number of members (including guests) who have made at least one booking.
+
+
+
+
 
 
 
