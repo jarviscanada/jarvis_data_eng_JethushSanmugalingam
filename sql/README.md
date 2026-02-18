@@ -244,15 +244,3 @@ ORDER BY SUBSTRING(surname, 1, 1)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
