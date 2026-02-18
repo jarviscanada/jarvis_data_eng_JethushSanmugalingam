@@ -180,6 +180,46 @@ Q22. Find the total number of members (including guests) who have made at least 
 SELECT COUNT(DISTINCT memid)
 FROM cd.bookings;
 
+Q23. Produce a list of each member name, id, and their first booking after September 1st 2012. Order by member ID.
+
+SELECT cd.members.surname, cd.members.firstname, cd.members.memid, MIN(cd.bookings.starttime)
+FROM cd.members 
+JOIN cd.bookings
+ON cd.members.memid = cd.bookings.memid 
+WHERE cd.bookings.starttime >= '2012-09-01' 
+GROUP BY cd.members.surname, cd.members.firstname, cd.members.memid
+ORDER BY cd.members.memid;
+
+Q24. Produce a list of member names, with each row containing the total member count. Order by join date, and include guest members.
+
+
+Q25. Produce a monotonically increasing numbered list of members (including guests), ordered by their date of joining. Remember that member IDs are not guaranteed to be sequential.
+
+
+Q26. Output the facility id that has the highest number of slots booked. Ensure that in the event of a tie, all tieing results get output.
+
+#### String 
+
+Q27. Output the names of all members, formatted as 'Surname, Firstname' 
+
+SELECT CONCAT(surname, ', ' , firstname) AS Name FROM cd.members
+
+Q28. You've noticed that the club's member table has telephone numbers with very inconsistent formatting. You'd like to find all the telephone numbers that contain parentheses, returning the member ID and telephone number sorted by member ID.
+
+SELECT memid, telephone FROM cd.members
+WHERE telephone LIKE '%(%'
+ORDER BY memid;
+
+Q29. You'd like to produce a count of how many members you have whose surname starts with each letter of the alphabet. Sort by the letter, and don't worry about printing out a letter if the count is 0.
+
+SELECT SUBSTRING(surname, 1, 1), COUNT(memid)
+FROM cd.members
+GROUP BY SUBSTRING(surname, 1, 1)
+ORDER BY SUBSTRING(surname, 1, 1)
+
+
+
+
 
 
 
