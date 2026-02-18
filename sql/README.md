@@ -134,7 +134,7 @@ ORDER BY m.surname, m.firstname;
 
 Q16. How can you output a list of all members who have recommended another member? Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
 
---Need to do 
+--Need to do
 
 Q17. How can you output a list of all members, including the individual who recommended them (if any), without using any joins? Ensure that there are no duplicates in the list, and that each firstname + surname pairing is formatted as a column and ordered.
 
@@ -154,8 +154,6 @@ Q19. Produce a list of the total number of slots booked per facility. For now, j
 
 SELECT facid, SUM(slots) 
 FROM cd.bookings
-JOIN cd.facilities
-ON cd.bookings.facid = cd.facilities.facid
 GROUP BY facid
 ORDER BY facid;
 
@@ -192,12 +190,25 @@ ORDER BY cd.members.memid;
 
 Q24. Produce a list of member names, with each row containing the total member count. Order by join date, and include guest members.
 
+SELECT COUNT(*) OVER(), firstname, surname
+FROM cd.members 
+ORDER BY joindate;
 
 Q25. Produce a monotonically increasing numbered list of members (including guests), ordered by their date of joining. Remember that member IDs are not guaranteed to be sequential.
 
+select row_number() over(order by joindate), firstname, surname
+	from cd.members
+order by joindate      
 
 Q26. Output the facility id that has the highest number of slots booked. Ensure that in the event of a tie, all tieing results get output.
 
+select facid, total from (
+	select facid, sum(slots) total, rank() over (order by sum(slots) desc) rank
+        	from cd.bookings
+		group by facid
+	) as ranked
+	where rank = 1
+	
 #### String 
 
 Q27. Output the names of all members, formatted as 'Surname, Firstname' 
