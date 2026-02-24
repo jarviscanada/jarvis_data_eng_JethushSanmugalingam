@@ -1,5 +1,11 @@
-#**Introduction**
-This project has a strong focus on Linux, bash scripts, and SQL, with a bit of Docker. As Jarvis has a Linux Cluster Administration (LCA) team that manages a Linux cluster of 10 nodes/servers running Rocky Linux, and these servers are internally connected through a switch, and are able to communicate through internal IPv4 addresses. The technologies I used for this project are: Bash to develop scripts for automated data collection, PostgreSQL: used for storing usage metrics, Git: version control for managing and tracking changes to scripts and files. Linux: Target platform for running the monitoring scripts and collecting metrics. 
+# Introduction
+This project implements a Linux cluster monitoring agent that collects hardware
+specifications and system resource usage from Linux hosts and stores them in a
+PostgreSQL database. The agent is designed to support basic monitoring and
+capacity analysis for a small Linux cluster.
+
+The solution uses Bash scripts for data collection, Docker for database
+deployment, and PostgreSQL for persistent storage.
 
 #**Quick Start**
 ## Start a psql instance using psql_docker.sh 
